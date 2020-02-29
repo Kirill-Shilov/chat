@@ -5,6 +5,9 @@ defmodule Chat.Schema.User do
   import Ecto.Changeset
   alias Chat.Schema.{Message, Room}
 
+  @pow_assocs {:has_many, :messages, Message}
+  @pow_assocs {:has_many, :rooms, Room}
+
   schema "users" do
     field :role, :string, default: "user"
     has_many :messages, Message

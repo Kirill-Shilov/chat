@@ -3,10 +3,10 @@ use Mix.Config
 # Configure your database
 config :chat, Chat.Repo,
    port: "5432",                          
-   username: "elixir",                  
-   password: "testpassword@#$",                   
+   username: "postgres",                  
+   password: "password",                   
    database: "chat_dev",        
-   hostname: "localhost",              
+   hostname: "172.17.0.2",              
    pool_size: 10 
 
 # For development, we disable any cache and enable

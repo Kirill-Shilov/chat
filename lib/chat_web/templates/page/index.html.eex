@@ -1,14 +1,11 @@
-<!-- The list of messages will appear here: -->
-<ul id='msg-list' class='row' style='list-style: none; min-height:200px; padding: 10px;'></ul>
+<ul id='message-list' class='column' style='list-style: none; min-height:200px; padding: 10px;'></ul>
+<ul id='room-list' class='column' style='list-style: none; min-height:200px; padding: 10px;'></ul>
 
 <script>window.userToken = "<%= assigns[:token] %>";</script>
 <script>window.userId = "<%= assigns[:user_id] %>";</script>
 <script>window.roomId = "<%= assigns[:room_id] %>";</script>
 
 <div class="row">
-  <div class="col-xs-3">
-    <input type="text" id="name" class="form-control" placeholder="Your Name" autofocus>
-  </div>
   <div class="col-xs-9">
     <input type="text" id="msg" class="form-control" placeholder="Your Message">
   </div>

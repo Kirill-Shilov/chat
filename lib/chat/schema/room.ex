@@ -1,6 +1,5 @@
 defmodule Chat.Schema.Room do
   use Ecto.Schema
-  use Pow.Ecto.Schema
   import Ecto.Changeset
   alias Chat.Schema.{User, Message}
 

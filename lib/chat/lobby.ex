@@ -102,14 +102,4 @@ defmodule Chat.Lobby do
     Room.changeset(room, %{})
   end
 
-
-  @doc """
-  Returns the list of rooms.
-
-  ## Examples
-
-      iex> list_rooms()
-      [%Room{}, ...]
-
-  """
 end

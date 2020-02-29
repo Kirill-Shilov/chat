@@ -52,35 +52,47 @@ let socket = new Socket("/socket", {params: {token: window.userToken, user_id: w
 //     end
 //
 // Finally, connect to the socket:
+
 if (window.userToken) {
   socket.connect()
 }
 
 let parsedUrl = new URL(window.location.href);
 
-let window.roomId = parsedUrl.pathname
+let room_id = parsedUrl.pathname;
 
+window.roomId = room_id
 // Now that you are connected, you can join channels with a topic:
-let channel = socket.channel("room:" + , {})
 
-//shout 
+let channel = socket.channel("room:" + {})
+//let channel = socket.channel("room:lobby" + {})
 
-channel.on('change', function (payload) { // listen to the 'shout' event
+channel.on('change', function (payload) { // listen to the 'change' event
+//  console.log(payload)
+  let li = document.createElement("li"); // create new list item DOM element
+  let name = payload.user_id || 'guest';    // get name from payload or set default
+  li.innerHTML = '<b>' + name + '</b>: ' + payload.message; // set li contents
+  ml.appendChild(li);                    // append to list
+});
+
+
+channel.on('room_list', function (payload) { 
   console.log(payload)
-//  let li = document.createElement("li"); // create new list item DOM element
-//  let name = payload.user_id || 'guest';    // get name from payload or set default
-//  li.innerHTML = '<b>' + name + '</b>: ' + payload.message; // set li contents
-//  ul.appendChild(li);                    // append to list
+  let rl = document.createElement("li"); 
+  li.innerHTML = '<b>' + name + '</b>: ' + payload.message;
+  rl.appendChild(li);
 });
 
 channel.join()
   .receive("ok", resp => { console.log("Joined successfully", resp) })
   .receive("error", resp => { console.log("Unable to join", resp) })
 
-console.log(parsedUrl.pathname.replace(/^\/+/g, ''))
+//console.log(parsedUrl.pathname.replace(/^\/+/g, ''))
 
-let ul = document.getElementById('msg-list');        // list of messages.
-let name = document.getElementById('name');          // name of message sender
+
+let rl = document.getElementById('room-list');        // list of rooms.
+let ml = document.getElementById('message-list');        // list of messages.
+//let name = document.getElementById('name');          // name of message sender
 let msg = document.getElementById('msg');            // message input field
 
 msg.addEventListener('keypress', function (event) {
@@ -93,5 +105,4 @@ msg.addEventListener('keypress', function (event) {
         }
     
 });
-
 
